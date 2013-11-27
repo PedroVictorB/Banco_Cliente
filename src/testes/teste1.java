@@ -4,7 +4,7 @@
  */
 package testes;
 
-import Conexao.comCli;
+import Conexao.conCli;
 
 /**
  *

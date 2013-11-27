@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  *
  * @author Pedro
  */
-public class comCli extends Thread {
+public class conCli extends Thread {
 // Flag que indica quando se deve terminar a execução.
 
     private static boolean done = false;
@@ -29,7 +29,7 @@ public class comCli extends Thread {
     private String comando;
     
 
-    public comCli(Socket conexao, String comando) {
+    public conCli(Socket conexao, String comando) {
         this.conexao = conexao;
         this.comando = comando;
         try {

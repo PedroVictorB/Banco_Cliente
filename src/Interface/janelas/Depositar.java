@@ -4,7 +4,7 @@
  */
 package Interface.janelas;
 
-import Conexao.comCli;
+import Conexao.conCli;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -107,7 +107,7 @@ public class Depositar extends javax.swing.JFrame {
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         try {
-            comCli cc = new comCli(new Socket("127.0.0.1", 2222), "INSERT " + jTextField1.getText() + " " + jTextField2.getText() + " " + jTextField3.getText());
+            conCli cc = new conCli(new Socket("127.0.0.1", 2222), "comando1 " + jTextField1.getText() + " " + jTextField2.getText() + " " + jTextField3.getText());
         } catch (UnknownHostException ex) {
             Logger.getLogger(Depositar.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
