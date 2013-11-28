@@ -4,30 +4,22 @@
  */
 package Conexao;
 
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.PrintStream;
 import java.net.Socket;
-import java.net.UnknownHostException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author Pedro
  */
 public class conCli extends Thread {
-// Flag que indica quando se deve terminar a execução.
-
-    private static boolean done = false;
 
     private Socket conexao;
     private String comando;
     
+    //O comando vai obedecer o seguinte padrão:
+    //1-Os valores deverão ter 1 espaço entre eles para que a função split no servidor separe cada um.
+    //2-O primeiro valor é a operação, o segundo é o numero da conta e os demais valores são as variáveis.
 
     public conCli(Socket conexao, String comando) {
         this.conexao = conexao;
