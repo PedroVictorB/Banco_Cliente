@@ -5,11 +5,14 @@
 package Interface.janelas;
 
 import Conexao.conCli;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JLabel;
 
 /**
  *
@@ -18,6 +21,8 @@ import java.util.logging.Logger;
 public class Consultar extends javax.swing.JFrame {
 
     private int conta;
+    static String msg = "teste";
+    private static Socket conexao;
 
     public void set_conta(int conta) {
         this.conta = conta;
@@ -29,8 +34,12 @@ public class Consultar extends javax.swing.JFrame {
     public Consultar() {
         initComponents();
         try {
-
-            conCli cc = new conCli(new Socket("127.0.0.1", 2222), "4" + " " + conta);
+            Socket s = new Socket("127.0.0.1", 2222);
+            Thread cc = new conCli(conexao, "4" + " " + 1);
+            System.out.println("passei 1.2");
+            cc.start();
+            System.out.println("passei 1.3");
+            jLabel2.setText(msg);
         } catch (UnknownHostException ex) {
             Logger.getLogger(Depositar.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -50,7 +59,7 @@ public class Consultar extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Saldo:");
 
@@ -114,6 +123,26 @@ public class Consultar extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Consultar().setVisible(true);
+                try {
+            //recebe mensagens de outro cliente através do servidor
+            BufferedReader entrada = new BufferedReader(new InputStreamReader(conexao.getInputStream()));
+            //cria variavel de mensagem
+            
+            while(true){
+                System.out.println("passei 3");
+                // pega o que o servidor enviou
+                msg = entrada.readLine();
+                //se a mensagem contiver dados, passa pelo if, 
+                // caso contrario cai no break e encerra a conexao
+                if (msg == null) {
+                    System.out.println("Conexão encerrada!");
+                    System.exit(0);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Ocorreu uma Falha... .. ." + 
+                " IOException: " + e);
+        }
             }
         });
     }
