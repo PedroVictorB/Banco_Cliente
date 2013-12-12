@@ -23,9 +23,9 @@ public class Consultar2 extends Thread {
     private String conta;
     
     // construtor que recebe o socket do cliente
-    public Consultar2(Socket socket, String str) {
-        this.conexao = socket;
-        this.conta = str;
+    public Consultar2(Socket conexao, String conta) {
+        this.conexao = conexao;
+        this.conta = conta;
     }
 
     public void executa(){
