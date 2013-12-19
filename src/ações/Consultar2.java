@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -20,7 +22,7 @@ public class Consultar2 extends Thread {
 
     // parte que controla a recepção de mensagens do cliente
     private Socket conexao;
-    private String conta;
+    public String conta;
     
     // construtor que recebe o socket do cliente
     public Consultar2(Socket conexao, String conta) {
@@ -61,6 +63,7 @@ public class Consultar2 extends Thread {
                     System.out.println("Consulta não disponível");
                 } else {
                     System.out.println(msg);
+                    //this.conexao.close();
                 }
             }
         } catch (IOException e) {
